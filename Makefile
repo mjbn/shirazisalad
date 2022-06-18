@@ -10,4 +10,4 @@ uninstall:
 	rm ~/.local/bin/$(binName)
 
 clean:
-	rm $(binName).c $(binName)
+	rm $(binName)
