@@ -2,6 +2,7 @@
 #define shiraz_header
 
 #include <cstddef>
+#include <ostream>
 #include <string>
 #include <iostream>
 #include <vector>
@@ -10,30 +11,40 @@ using namespace std;
 class shirazisalad {
 	private:
 		vector<string> sort_html(string rawdata){
-			int i = 0;
-			int n = rawdata.length();
-			vector<string> htmltag;
-			while (i<n) {
-				int s = rawdata.find('<', i);
-				int e = rawdata.find('>', s+1);
-				int endstag = rawdata.find("</", e+1);
-                int endetag = rawdata.find('>', endstag+2);
-				if(rawdata[s+1]!='!' and rawdata[s+1]!='/' and rawdata[s+1]!='s' and rawdata[s+1]!='S'){
-					string tmp;
-					for (int j = s;j<=e;j++) {tmp += rawdata[j];}
-					htmltag.push_back(tmp);
-					if (rawdata[endstag+2]==rawdata[s+1]){
-						tmp = "";
-						for (int j = e+1; j<endstag; j++) {tmp += rawdata[j];}
-						htmltag.push_back(tmp);
-					}
-                    tmp = "";
-                    for (int j = endstag; j<=endetag; j++){tmp += rawdata[j];}
-                    htmltag.push_back(tmp);
-				}
-				i = endetag+1;
-			}
-			return htmltag;
+			vector<string> tmpvector;
+			string tmp = "";
+            bool stagb=false; bool stage=false; bool etagb=false; bool etage=false;
+            for (int i=0; i<=rawdata.length(); i++) {
+                //if(stagb){cout<<1;}else {cout<<0;}
+                //if(stage){cout<<1;}else {cout<<0;}
+                //if(etagb){cout<<1;}else {cout<<0;}
+                //if(etage){cout<<1;}else {cout<<0;}
+                //cout<<"\n";
+                //cout<<rawdata[i]<< "\n";
+                if(rawdata[i]=='<' && rawdata[i+1]!='!' && rawdata[i+1]!='s' && rawdata[i+1]!='S'){
+                    if(rawdata[i+1]!='/'){
+                        stagb = true;
+                        etage = false;
+                    }else if(rawdata[i+2]!='s' && rawdata[i+2]!='S') {
+                        etagb = true;
+                        stage = false;
+                        if(tmp!=""){tmpvector.push_back(tmp); tmp="";}
+                    }
+			    }
+                if (stagb | etagb) {
+                    tmp+=rawdata[i];
+                    if (rawdata[i]=='>') {
+                        tmpvector.push_back(tmp);
+                        tmp = "";
+                        if(stage){stagb=false; stage=true;}
+                        if(etagb){etagb=false; etage=true;}
+                    }
+                }
+                if (stage && !etagb) {
+                    tmp+=rawdata[i];
+                }
+            }
+			return tmpvector;
 		} 
 
 	public:
