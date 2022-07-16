@@ -1,10 +1,9 @@
 #ifndef shiraz_header
 #define shiraz_header
 
-#include <bits/types/struct_tm.h>
+#include <cstddef>
 #include <string>
 #include <iostream>
-#include <type_traits>
 #include <vector>
 using namespace std;
 
@@ -118,10 +117,36 @@ class shirazisalad {
                 }
             }
             return tmpvector;
+        }
+        vector<string> getElementByTagData(string tag){
+            vector<string> tmpvector;
+            string tmp;
+            bool write;
+            for (int i = 0; i<=HtmlArraySize; i++) {
+                if (write) {
+                    int tmptagLocationEnd = HtmlArray[i].find("</"+tag+">");
+                    if (tmptagLocationEnd!=-1) {
+                        tmp+=HtmlArray[i];
+                        tmpvector.push_back(tmp);
+                        tmp = "";
+                        write = false;
+                    }else {
+                        tmp+=HtmlArray[i];
+                    }
+                }else if (HtmlArray[i][0]=='<' & HtmlArray[i][1]!='/') {
+                    int tmptagLocation = HtmlArray[i].find(tag);
+                    if (tmptagLocation!=-1) {
+                        tmp+=HtmlArray[i];
+                        write = true;
+                    }
+                }
+            }
+            return tmpvector;
 
         }
-        string getElementData(){}
-		shirazisalad(string html, string tag, string tagarg, string tagargvalue, bool data){
+        vector<string> getElementByClassData(){}
+        vector<string> getElementByIdData(){}
+		shirazisalad(string html){
 			HtmlArray = sort_html(html);
             HtmlArraySize = HtmlArray.size();
 		}
