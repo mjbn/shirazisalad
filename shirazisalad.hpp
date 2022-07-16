@@ -142,9 +142,39 @@ class shirazisalad {
                 }
             }
             return tmpvector;
+        }
+        vector<string> getElementByClassData(string _class){
+            vector<string> tmpvector;
+            string tmp;
+            string tag;
+            bool write = false;
+            for (int i = 0; i<=HtmlArraySize; i++) {
+                if (write) {
+                    int tmptagLocationEnd = HtmlArray[i].find("</"+tag+">");
+                    if (tmptagLocationEnd!=-1) {
+                        tmp+=HtmlArray[i];
+                        tmpvector.push_back(tmp);
+                        tmp = "";
+                        tag = "";
+                        write = false;
+                    }else {
+                        tmp+=HtmlArray[i];
+                    }
+                }else if (HtmlArray[i][0]=='<' & HtmlArray[i][1]!='/') {
+                    int _classLocation = HtmlArray[i].find("class=") + 6;
+                    _classLocation = HtmlArray[i].find(_class, _classLocation);
+                    if (_classLocation != -1) {
+                        tmp+=HtmlArray[i];
+                        for (int j=1; j<HtmlArray[i].find(' ');j++) {
+                            tag+=HtmlArray[i][j];
+                        }
+                        write = true;
+                    }
+                }
+            }
+            return tmpvector;
 
         }
-        vector<string> getElementByClassData(){}
         vector<string> getElementByIdData(){}
 		shirazisalad(string html){
 			HtmlArray = sort_html(html);
