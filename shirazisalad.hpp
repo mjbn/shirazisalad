@@ -42,7 +42,7 @@ class shirazisalad {
 
         vector<string> getElementByTag(string tag){
             vector<string> tmpvector;
-            for (int i = 0; i<=HtmlArraySize; i++) {
+            for (int i = 0; i<HtmlArraySize; i++) {
                 if (HtmlArray[i][0]=='<' & HtmlArray[i][1]!='/') {
                     int tagLocation = HtmlArray[i].find(tag);
                     if (tagLocation!=-1) {
@@ -54,7 +54,7 @@ class shirazisalad {
         }
         vector<string> getElementByClass(string _class){
             vector<string> tmpvector;
-            for (int i = 0; i<=HtmlArraySize; i++) {
+            for (int i = 0; i<HtmlArraySize; i++) {
                 if (HtmlArray[i][0]=='<' & HtmlArray[i][1]!='/') {
                     int _classLocation = HtmlArray[i].find("class=") + 6;
                     _classLocation = HtmlArray[i].find(_class, _classLocation);
@@ -67,7 +67,7 @@ class shirazisalad {
         }
         vector<string> getElementById(string id){
             vector<string> tmpvector;
-            for (int i = 0; i<=HtmlArraySize; i++) {
+            for (int i = 0; i<HtmlArraySize; i++) {
                 if (HtmlArray[i][0]=='<' & HtmlArray[i][1]!='/') {
                     int idLocation = HtmlArray[i].find("id=") +3;
                     idLocation = HtmlArray[i].find(id, idLocation);
@@ -80,7 +80,7 @@ class shirazisalad {
         }
         vector<string> getElementByArg(string tagarg, string tagargvalue){
             vector<string> tmpvector;
-            for (int i = 0; i<=HtmlArraySize; i++) {
+            for (int i = 0; i<HtmlArraySize; i++) {
                 if (HtmlArray[i][0]=='<' & HtmlArray[i][1]!='/') {
                     int argLocation1 = HtmlArray[i].find(tagarg+"="+"\'"+tagargvalue+"\'");
                     int argLocation2 = HtmlArray[i].find(tagarg+"="+"\""+tagargvalue+"\"");
@@ -94,7 +94,7 @@ class shirazisalad {
         vector<string> getElementArg(string tag, string tagarg){
             vector<string> htmltag = getElementByTag(tag);
             vector<string> tmpvector;
-            for (int i = 0; i<=htmltag.size(); i++) {
+            for (int i = 0; i<htmltag.size(); i++) {
                 if (htmltag[i][0]=='<' & htmltag[i][1]!='/') {
                     int argLocation1 = htmltag[i].find(tagarg+"="+"\'");
                     int argLocation2 = htmltag[i].find(tagarg+"="+"\"");
@@ -124,7 +124,7 @@ class shirazisalad {
             vector<string> tmpvector;
             string tmp;
             bool write;
-            for (int i = 0; i<=HtmlArraySize; i++) {
+            for (int i = 0; i<HtmlArraySize; i++) {
                 if (write) {
                     int tmptagLocationEnd = HtmlArray[i].find("</"+tag+">");
                     if (tmptagLocationEnd!=-1) {
@@ -150,7 +150,7 @@ class shirazisalad {
             string tmp;
             string tag;
             bool write = false;
-            for (int i = 0; i<=HtmlArraySize; i++) {
+            for (int i = 0; i<HtmlArraySize; i++) {
                 if (write) {
                     int tmptagLocationEnd = HtmlArray[i].find("</"+tag+">");
                     if (tmptagLocationEnd!=-1) {
@@ -181,7 +181,7 @@ class shirazisalad {
             string tmp;
             string tag;
             bool write = false;
-            for (int i = 0; i<=HtmlArraySize; i++) {
+            for (int i = 0; i<HtmlArraySize; i++) {
                 if (write) {
                     int tmptagLocationEnd = HtmlArray[i].find("</"+tag+">");
                     if (tmptagLocationEnd!=-1) {
