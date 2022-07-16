@@ -9,9 +9,6 @@ using namespace std;
 
 class shirazisalad {
 	private:
-        vector<string> HtmlArray;
-        int HtmlArraySize;
-	public:
 		vector<string> sort_html(string rawdata){
 			int i = 0;
 			int n = rawdata.length();
@@ -38,6 +35,11 @@ class shirazisalad {
 			}
 			return htmltag;
 		} 
+
+	public:
+        vector<string> HtmlArray;
+        int HtmlArraySize;
+
         vector<string> getElementByTag(string tag){
             vector<string> tmpvector;
             for (int i = 0; i<=HtmlArraySize; i++) {
