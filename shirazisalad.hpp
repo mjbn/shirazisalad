@@ -1,6 +1,7 @@
 #ifndef shiraz_header
 #define shiraz_header
 
+#include <bits/types/struct_tm.h>
 #include <string>
 #include <iostream>
 #include <type_traits>
@@ -88,10 +89,38 @@ class shirazisalad {
                 }
             }
             return tmpvector;
+        }
+        vector<string> getElementArg(string tag, string tagarg, string tagargvalue){
+            vector<string> htmltag = getElementByTag(tag);
+            vector<string> tmpvector;
+            for (int i = 0; i<=htmltag.size(); i++) {
+                if (htmltag[i][0]=='<' & htmltag[i][1]!='/') {
+                    int argLocation1 = htmltag[i].find(tagarg+"="+"\'");
+                    int argLocation2 = htmltag[i].find(tagarg+"="+"\"");
+                    if (argLocation1!=-1) {
+                        string tmp;
+                        argLocation1 = argLocation1+tagarg.length()+2;
+                        int argLocation1end = htmltag[i].find("\'",argLocation1);
+                        for (int j=argLocation1+1;j<argLocation1end ; j++) {
+                            tmp+=htmltag[i][j];
+                        }
+                        tmpvector.push_back(tmp);
+                    }
+                    if (argLocation2!=-1) {
+                        string tmp;
+                        argLocation1 = argLocation1+tagarg.length()+2;
+                        int argLocation1end = htmltag[i].find("\"",argLocation1);
+                        for (int j=argLocation1+1;j<argLocation1end ; j++) {
+                            tmp+=htmltag[i][j];
+                        }
+                        tmpvector.push_back(tmp);
+                    }
+                }
+            }
+            return tmpvector;
 
         }
-        vector<string> getElementArg(){}
-        vector<string> getElementData(){}
+        string getElementData(){}
 		shirazisalad(string html, string tag, string tagarg, string tagargvalue, bool data){
 			HtmlArray = sort_html(html);
             HtmlArraySize = HtmlArray.size();
