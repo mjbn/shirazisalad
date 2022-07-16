@@ -102,7 +102,7 @@ class shirazisalad {
                         string tmp;
                         argLocation1 = argLocation1+tagarg.length()+2;
                         int argLocation1end = htmltag[i].find("\'",argLocation1);
-                        for (int j=argLocation1+1;j<argLocation1end ; j++) {
+                        for (int j=argLocation1;j<argLocation1end ; j++) {
                             tmp+=htmltag[i][j];
                         }
                         tmpvector.push_back(tmp);

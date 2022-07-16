@@ -10,5 +10,7 @@ int main(int argc , char** arcv){
 	shirazisalad sh = shirazisalad(text);
     cout << sh.HtmlArray[2] << ends;
     cout << sh.HtmlArraySize << ends;
+    vector<string> arg = sh.getElementArg("h1", "style");
+    cout << arg[0] << ends;
 	return 0;
 }
