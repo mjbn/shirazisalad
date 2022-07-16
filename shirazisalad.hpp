@@ -91,7 +91,7 @@ class shirazisalad {
             }
             return tmpvector;
         }
-        vector<string> getElementArg(string tag, string tagarg, string tagargvalue){
+        vector<string> getElementArg(string tag, string tagarg){
             vector<string> htmltag = getElementByTag(tag);
             vector<string> tmpvector;
             for (int i = 0; i<=htmltag.size(); i++) {
