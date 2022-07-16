@@ -67,16 +67,30 @@ class shirazisalad {
             vector<string> tmpvector;
             for (int i = 0; i<=HtmlArraySize; i++) {
                 if (HtmlArray[i][0]=='<' & HtmlArray[i][1]!='/') {
-                    int _classLocation = HtmlArray[i].find("id=") + 6;
-                    _classLocation = HtmlArray[i].find(id, _classLocation);
-                    if (_classLocation != -1) {
+                    int idLocation = HtmlArray[i].find("id=") +3;
+                    idLocation = HtmlArray[i].find(id, idLocation);
+                    if (idLocation != -1) {
                         tmpvector.push_back(HtmlArray[i]);
                     }
                 }
             }
             return tmpvector;
         }
-        vector<string> getElementByarg(){}
+        vector<string> getElementByArg(string tagarg, string tagargvalue){
+            vector<string> tmpvector;
+            for (int i = 0; i<=HtmlArraySize; i++) {
+                if (HtmlArray[i][0]=='<' & HtmlArray[i][1]!='/') {
+                    int argLocation1 = HtmlArray[i].find(tagarg+"="+"\'"+tagargvalue+"\'");
+                    int argLocation2 = HtmlArray[i].find(tagarg+"="+"\""+tagargvalue+"\"");
+                    if (argLocation1!=-1 | argLocation2!=-1) {
+                        tmpvector.push_back(HtmlArray[i]);
+                    }
+                }
+            }
+            return tmpvector;
+
+        }
+        vector<string> getElementArg(){}
         vector<string> getElementData(){}
 		shirazisalad(string html, string tag, string tagarg, string tagargvalue, bool data){
 			HtmlArray = sort_html(html);
